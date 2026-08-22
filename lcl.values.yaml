@@ -1,0 +1,7 @@
+replicaCount: 1
+image:
+  registry: ghcr.io/bouc-io
+  repository: application/web/web-mirror-ui
+  tag: ""
+
+resources: {}

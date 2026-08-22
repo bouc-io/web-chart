@@ -1,0 +1,20 @@
+{{- if .Values.pdb.create }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "web-chart.fullname" . }}-pdb
+  namespace: "default"
+  labels:
+    {{- include "web-chart.labels" . | nindent 4 }}
+    app: {{ include "web-chart.fullname" . }}
+spec:
+  {{- if .Values.pdb.minAvailable }}
+  minAvailable: {{ .Values.pdb.minAvailable }}
+  {{- end }}
+  {{- if or .Values.pdb.maxUnavailable (not .Values.pdb.minAvailable) }}
+  maxUnavailable: {{ .Values.pdb.maxUnavailable | default 1 }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app: {{ include "web-chart.fullname" . }}
+{{- end }}

@@ -1,0 +1,10 @@
+replicaCount: 1
+image:
+  registry: ghcr.io/bouc-io
+  repository: application/web/web-mirror-ui
+  tag: ""
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 64Mi
